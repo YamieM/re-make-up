@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Abel", sans-serif;
+}
+.filter-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+}
+.filterForm_input-brand {
+  @media (max-width: 500px) {
+    width: 100px;
+  }
+}
