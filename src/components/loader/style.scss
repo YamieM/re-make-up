@@ -1,10 +1,10 @@
 .preloader-active {
-  position: fixed;
+  display: flex;
   left: 0;
-  top: 0;
   width: 100vw;
   height: 100vh;
   z-index: 2;
+  background-color: white;
 
   .loader {
     width: 50px;
@@ -17,19 +17,31 @@
     top: 50%;
     transform: translate(-50%, -50%);
     animation: 2s spin infinite linear;
-  }
-
-  &.loader_success {
-    opacity: 0;
-  }
-  &.loader_unSuccess {
-    opacity: 1;
-  }
+  } 
 }
 .preloader-disabled {
   display: none;
 }
-
+.preloader-product-active {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: white;
+  .loader {
+    width: 50px;
+    height: 50px;
+    border: 10px solid rgb(247, 213, 200);
+    border-radius: 50%;
+    border-top-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: 2s spin infinite linear;
+  }
+}
 @keyframes spin {
   from {
     transform: translate(-50%, -50%) rotate(0deg);

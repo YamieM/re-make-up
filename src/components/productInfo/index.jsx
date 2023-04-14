@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export const ProductInfo = ({ product }) => {
   return (
     <div className="product-info">
@@ -11,7 +13,9 @@ export const ProductInfo = ({ product }) => {
         <h3 className="info-about-product">
           Rating: {product.rating === null ? "unrated" : `${product.rating} ✭ `}
         </h3>
-        <button className="buy-now-button">Buy Now</button>
+        <NavLink target="_blank" to={product.product_link}>
+          <button className="buy-now-button">Buy Now</button>
+        </NavLink>
       </div>
     </div>
   );

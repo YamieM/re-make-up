@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Abel", sans-serif;
+  font-family: "Abel", sans-serif;  
 }
 .filter-form {
   display: flex;
@@ -12,8 +12,24 @@
   width: 100%;
   max-width: 500px;
 }
+.filter-form > label {
+  @media (max-width: 750px) {
+    font-size: 14px;
+  }
+}
 .filterForm_input-brand {
-  @media (max-width: 500px) {
+  @media (max-width: 750px) {
     width: 100px;
+  }
+  @media (max-width: 450px) {
+    width: 70px;
+  }
+}
+.filter-form_tags-list {
+  @media (max-width: 750px) {
+    width: 100px;
+  }
+  @media (max-width: 450px) {
+    width: 70px;
   }
 }

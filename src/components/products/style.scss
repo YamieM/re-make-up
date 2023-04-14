@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 30px;
-  @media (max-width: 500px) {
+  @media (max-width: 750px) {
     width: 100vw;
   }
 }
@@ -16,7 +16,7 @@
   margin: 0px 10px 0px 10px;
   text-decoration: none;
   text-transform: uppercase;
-  @media (max-width: 500px) {
+  @media (max-width: 750px) {
     font-size: 12px;
   }
 }
@@ -39,7 +39,7 @@ a {
   width: 280px;
   height: 350px;
   transition: 0.3s;
-  @media (max-width: 500px) {
+  @media (max-width: 750px) {
     width: 170px;
     height: 300px;
     flex-direction: column;
@@ -56,8 +56,8 @@ a {
   width: 210px;
   height: 210px;
   border-radius: 5%;
-  @media (max-width: 500px) {
-    width: 100%;
+  @media (max-width: 750px) {
+    width: 170px;
     height: 60%;
   }
 }

@@ -1,22 +1,29 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../../styles/aboutProduct.scss";
 import { ProductInfo } from "../../components/productInfo";
 import { ProductColors } from "../../components/productColors";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleProduct } from "../../store/productsReducer";
+import { setSingleUrl } from "../../store/urlReducer";
+import { getSingleUrl } from "../../helpers/getSingleUrl";
+import { Loader } from "../loader/";
+import "../../styles/aboutProduct.scss";
 
 export const AboutProduct = () => {
-  const params = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState({});
-  useEffect(() => {
-    axios
-      .get(`http://makeup-api.herokuapp.com/api/v1/products/${params.id}.json`)
-      .then((resp) => {
-        const product = resp.data;
-        setProduct(product);
-      });
-  }, [setProduct, params.id]);
+  const params = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.products.singleProduct);
+  const [classLoader, setState] = useState("preloader-product-active");
+
+  useEffect(() => {   
+    if (product.id) {
+      setState("preloader-disabled");
+    }
+    console.log(product);
+    dispatch(setSingleUrl(getSingleUrl(params.id)));
+    dispatch(fetchSingleProduct());
+  }, [dispatch, params.id, setState, product]);
 
   return (
     <div className="main-container">
@@ -35,6 +42,7 @@ export const AboutProduct = () => {
       <span onClick={() => navigate(-1)} className="back-button">
         Back
       </span>
+      <Loader class={classLoader} />
     </div>
   );
 };
