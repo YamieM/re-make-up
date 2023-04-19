@@ -1,14 +1,13 @@
-import { put, call, select, takeLatest } from "redux-saga/effects";
-import { setProducts } from "../store/productsReducer";
-import axios from "axios";
+import { put, call, takeLatest } from "redux-saga/effects";
+import { apiFetchProducts } from "./api";
+import { fetchProductsError, fetchProductsSuccess } from "../store/urlReducer";
 
-function* fetchWorker() {
-  const url = yield select(({ url }) => url.url);
+function* fetchWorker({ payload }) {
   try {
-    const resp = yield call(axios.get, [url]);
-    yield put(setProducts(resp.data));
+    const resp = yield call(apiFetchProducts, payload);
+    yield put(fetchProductsSuccess(resp.data));
   } catch (err) {
-    console.log(err);
+    yield put(fetchProductsError(err));
   }
 }
 

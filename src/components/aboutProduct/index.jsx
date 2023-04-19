@@ -4,7 +4,6 @@ import { ProductInfo } from "../../components/productInfo";
 import { ProductColors } from "../../components/productColors";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../../store/productsReducer";
-import { setSingleUrl } from "../../store/urlReducer";
 import { getSingleUrl } from "../../helpers/getSingleUrl";
 import { Loader } from "../loader/";
 import "../../styles/aboutProduct.scss";
@@ -16,14 +15,13 @@ export const AboutProduct = () => {
   const product = useSelector((state) => state.products.singleProduct);
   const [classLoader, setState] = useState("preloader-product-active");
 
-  useEffect(() => {   
-    if (product.id) {
-      setState("preloader-disabled");
-    }
-    console.log(product);
-    dispatch(setSingleUrl(getSingleUrl(params.id)));
-    dispatch(fetchSingleProduct());
-  }, [dispatch, params.id, setState, product]);
+  // useEffect(() => {   
+  //   if (product.id) {
+  //     setState("preloader-disabled");
+  //   }
+  //   console.log(product);
+  //   dispatch(fetchSingleProduct());
+  // }, [dispatch, params.id, setState, product]);
 
   return (
     <div className="main-container">

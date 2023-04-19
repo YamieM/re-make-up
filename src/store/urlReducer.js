@@ -1,21 +1,53 @@
 const defaultState = {
   url: "http://makeup-api.herokuapp.com/api/v1/products.json",
   singleUrl: "",
+  products: {
+    data: [],
+    isLoading: false,
+    error: null,
+  },
 };
 
-export const urlReducer = (state = defaultState, action) => {
+export const productReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case "CHANGE_URL":
-      return { ...state, url: action.payload };
-    case "CHANGE_SINGLE_URL":
-      return { ...state, singleUrl: action.payload };
+    case "FETCH_PRODUCTS":
+      return { ...state, products: { ...state.products, isLoading: true } };
+    case "FETCH_PRODUCTS_SUCCESS":
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          isLoading: false,
+          data: action.payload,
+        },
+      };
+    case "FETCH_PRODUCTS_ERROR":
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          isLoading: false,
+          products: [],
+          error: action.payload,
+        },
+      };
     default:
       return state;
   }
 };
 
-export const changeUrl = (payload) => ({ type: "CHANGE_URL", payload });
-export const setSingleUrl = (payload) => ({
-  type: "CHANGE_SINGLE_URL",
+/** fetch products actions */
+
+export const fetchProducts = (payload) => ({
+  type: "FETCH_PRODUCTS",
+  payload,
+});
+export const fetchProductsSuccess = (payload) => ({
+  type: "FETCH_PRODUCTS_SUCCESS",
+  payload,
+});
+
+export const fetchProductsError = (payload) => ({
+  type: "FETCH_PRODUCTS_ERROR",
   payload,
 });

@@ -5,8 +5,8 @@ const defaultState = {
 
 export const productsReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case "SET_PRODUCTS":
-      return { ...state, products: action.payload };
+    // case "SET_PRODUCTS":
+    //   return { ...state, products: action.payload };
     case "SET_SINGLE_PRODUCT":
       return { ...state, singleProduct: action.payload };
     default:
@@ -19,5 +19,5 @@ export const setSingleProduct = (payload) => ({
   type: "SET_SINGLE_PRODUCT",
   payload,
 });
-export const fetchProducts = () => ({ type: "FETCH_PRODUCTS" });
+// export const fetchProducts = () => ({ type: "FETCH_PRODUCTS" });
 export const fetchSingleProduct = () => ({ type: "FETCH_SINGLE_PRODUCT" });
