@@ -1,6 +1,4 @@
-const defaultState = {
-  url: "http://makeup-api.herokuapp.com/api/v1/products.json",
-  singleUrl: "",
+const defaultState = {  
   products: {
     data: [],
     isLoading: false,
@@ -27,7 +25,7 @@ export const productReducer = (state = defaultState, action) => {
         products: {
           ...state.products,
           isLoading: false,
-          products: [],
+          data: [],
           error: action.payload,
         },
       };

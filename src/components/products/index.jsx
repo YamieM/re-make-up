@@ -16,7 +16,7 @@ export const Products = () => {
       {data.length ? (
         data.map((product) => <Product key={product.id} {...product} />)
       ) : (
-        <span className="error-disabled">NOT FOUND</span>
+        <span className="error-active">NOT FOUND</span>
       )}
     </div>
   );

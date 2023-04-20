@@ -4,11 +4,11 @@ import { BrandNameInput } from "../brandNameInput";
 import { FilterFormButton } from "../filterFormButton";
 import "./style.scss";
 
-export const FilterForm = () => {
-  const [filterParams, setFilterParams] = useState({
-    brandName: sessionStorage.getItem("brandName") || "",
-    productType: sessionStorage.getItem("productType") || false,
-  });
+export const FilterForm = ({ brandName, productType, setFilterParams }) => {
+  // const [filterParams, setFilterParams] = useState({
+  //   brandName: sessionStorage.getItem("brandName") || "",
+  //   productType: sessionStorage.getItem("productType") || undefined,
+  // });
 
   return (
     <div className="form-container">
@@ -17,10 +17,7 @@ export const FilterForm = () => {
         <label>Filter</label>
         <BrandNameInput setFilterParams={setFilterParams} />
         <ProductTypeSelect setFilterParams={setFilterParams} />
-        <FilterFormButton
-          brandName={filterParams.brandName}
-          productType={filterParams.productType}
-        />
+        <FilterFormButton brandName={brandName} productType={productType} />
       </form>
     </div>
   );
