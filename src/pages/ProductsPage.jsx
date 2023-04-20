@@ -16,12 +16,9 @@ export const ProductsPage = () => {
     (state) => state.productReducer.products
   );
 
-  console.log(data, isLoading);
   useEffect(() => {
-    if (!isLoading && !data.length) {
-      dispatch(fetchProducts({}));
-    }
-  }, [data.length, dispatch, isLoading, error, filterParams]);
+    dispatch(fetchProducts({}));
+  }, [dispatch]);
 
   return (
     <main className="index-container">
