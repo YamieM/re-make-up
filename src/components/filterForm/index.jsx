@@ -1,14 +1,9 @@
-import { useState } from "react";
 import { ProductTypeSelect } from "../productTypeSelect";
 import { BrandNameInput } from "../brandNameInput";
 import { FilterFormButton } from "../filterFormButton";
 import "./style.scss";
 
 export const FilterForm = ({ brandName, productType, setFilterParams }) => {
-  // const [filterParams, setFilterParams] = useState({
-  //   brandName: sessionStorage.getItem("brandName") || "",
-  //   productType: sessionStorage.getItem("productType") || undefined,
-  // });
 
   return (
     <div className="form-container">

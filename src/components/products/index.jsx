@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Product } from "../product";
 import { Loader } from "../loader";
@@ -6,7 +5,7 @@ import "./style.scss";
 
 export const Products = () => {
   const { data, isLoading } = useSelector(
-    (state) => state.productReducer.products
+    (state) => state.productsReducer.products
   );
 
   if (isLoading) return <Loader class="preloader-active" />;
@@ -16,7 +15,7 @@ export const Products = () => {
       {data.length ? (
         data.map((product) => <Product key={product.id} {...product} />)
       ) : (
-        <span className="error-active">NOT FOUND</span>
+        <span className="error-active">BRAND NOT FOUND</span>
       )}
     </div>
   );

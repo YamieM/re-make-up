@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+// import defImage from "../../images/defProductImage.jpeg";
 
 export const ProductInfo = ({ product }) => {
   return (

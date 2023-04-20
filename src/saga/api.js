@@ -9,3 +9,9 @@ export const apiFetchProducts = ({ brand, product_type }) =>
       product_type,
     },
   });
+
+export const apiFetchSingleProduct = ({ id }) =>
+  axios({
+    method: "GET",
+    url: `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`,
+  });

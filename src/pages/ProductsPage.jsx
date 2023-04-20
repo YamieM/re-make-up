@@ -1,8 +1,8 @@
 import { FilterForm } from "../components/filterForm";
 import { Products } from "../components/products";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProducts, fetchProductsError } from "../store/urlReducer";
+import { fetchProducts } from "../store/productsReducer";
 
 export const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -12,12 +12,13 @@ export const ProductsPage = () => {
     productType: sessionStorage.getItem("productType") || undefined,
   });
 
-  const { data, isLoading, error } = useSelector(
-    (state) => state.productReducer.products
-  );
-
   useEffect(() => {
-    dispatch(fetchProducts({}));
+    dispatch(
+      fetchProducts({
+        brand: filterParams.brandName,
+        product_type: filterParams.productType,
+      })
+    );
   }, [dispatch]);
 
   return (
@@ -27,18 +28,7 @@ export const ProductsPage = () => {
         productType={filterParams.productType}
         setFilterParams={setFilterParams}
       />
-      {data.length ? (
-        <Products
-          brandName={filterParams.brandName}
-          productType={filterParams.productType}
-        />
-      ) : (
-        <span className="error-active">NOT FOUND</span>
-      )}
-      {/* <Products
-        brandName={filterParams.brandName}
-        productType={filterParams.productType}
-      /> */}
+      <Products />
     </main>
   );
 };

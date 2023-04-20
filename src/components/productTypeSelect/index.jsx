@@ -12,9 +12,9 @@ export const ProductTypeSelect = ({ setFilterParams }) => {
       className="filter-form_tags-list"
       title="Product type"
       onChange={onChangeProductType}
-      defaultValue={false}
+      defaultValue={sessionStorage.getItem("productType") || ""}
     >
-      <option value={false} disabled>
+      <option value="" disabled>
         Product type
       </option>
       <option value="Blush">Blush</option>

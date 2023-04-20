@@ -13,6 +13,7 @@ export const BrandNameInput = ({ setFilterParams }) => {
       className="filterForm_input-brand"
       placeholder="Input brand"
       onChange={onChangeBrand}
+      value={sessionStorage.getItem("brandName") || ""}
     />
   );
 };

@@ -1,22 +1,15 @@
-import { useDispatch } from "react-redux";
-import {
-  changeUrl,
-  fetchProducts,
-  fetchProductsError,
-  fetchProductsSuccess,
-} from "../../store/urlReducer";
-import { getUrl } from "../../helpers/getUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../store/productsReducer";
 
 export const FilterFormButton = ({ brandName, productType }) => {
+  const { isLoading } = useSelector((state) => state.productsReducer.products);
   const dispatch = useDispatch();
   const getFilterParams = (event) => {
     event.preventDefault();
-    // dispatch(fetchProductsError());
     dispatch(fetchProducts({ brand: brandName, product_type: productType }));
-    // dispatch(changeUrl(getUrl(brandName, productType)));
-    // dispatch(fetchProducts());
   };
-
+  if (isLoading)
+    return <input type="submit" name="submitBtn" value="Search" disabled />;
   return (
     <input
       type="submit"

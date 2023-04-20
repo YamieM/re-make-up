@@ -1,16 +1,15 @@
 import { applyMiddleware, createStore, combineReducers } from "redux";
-// import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
-import { productReducer } from "./urlReducer";
 import { productsReducer } from "./productsReducer";
+import { singleProductReducer } from "./singleProductReducer";
 import { rootWatcher } from "../saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-  productReducer,
-  products: productsReducer,
+  productsReducer,
+  singleProductReducer,
 });
 
 export const store = createStore(

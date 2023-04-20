@@ -8,7 +8,7 @@ export const ProductColors = ({ product }) => {
               <div
                 className="color-circle"
                 style={{ backgroundColor: `${color.hex_value}` }}
-              ></div>
+              />
               <h4 className="name-of-color">{color.colour_name}</h4>
             </div>
           );
