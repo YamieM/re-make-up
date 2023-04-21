@@ -1,18 +1,11 @@
-export const ProductTypeSelect = ({ setFilterParams }) => {
-  const onChangeProductType = (event) => {
-    setFilterParams((previousState) => {
-      return { ...previousState, productType: event.target.value };
-    });
-    sessionStorage.setItem("productType", event.target.value);
-  };
-
+export const ProductTypeSelect = (props) => {
   return (
     <select
+      {...props}
       name="filterForm_productType"
       className="filter-form_tags-list"
       title="Product type"
-      onChange={onChangeProductType}
-      defaultValue={sessionStorage.getItem("productType") || ""}
+      // defaultValue={sessionStorage.getItem("productType") || ""}
     >
       <option value="" disabled>
         Product type

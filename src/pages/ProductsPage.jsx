@@ -1,33 +1,23 @@
 import { FilterForm } from "../components/filterForm";
 import { Products } from "../components/products";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { fetchProducts } from "../store/productsReducer";
 
 export const ProductsPage = () => {
   const dispatch = useDispatch();
 
-  const [filterParams, setFilterParams] = useState({
-    brandName: sessionStorage.getItem("brandName") || "",
-    productType: sessionStorage.getItem("productType") || undefined,
-  });
+  const { isDataFetched } = useSelector(
+    (state) => state.productsReducer.products
+  );
 
   useEffect(() => {
-    dispatch(
-      fetchProducts({
-        brand: filterParams.brandName,
-        product_type: filterParams.productType,
-      })
-    );
+    dispatch(fetchProducts({}));
   }, [dispatch]);
 
   return (
     <main className="index-container">
-      <FilterForm
-        brandName={filterParams.brandName}
-        productType={filterParams.productType}
-        setFilterParams={setFilterParams}
-      />
+      <FilterForm />
       <Products />
     </main>
   );

@@ -3,21 +3,26 @@ const defaultState = {
     data: [],
     isLoading: false,
     error: null,
+    isDataFetched: false,
   },
 };
 
 export const productsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "FETCH_PRODUCTS":
-      return { ...state, products: { ...state.products, isLoading: true } };
-       
-      case "FETCH_PRODUCTS_SUCCESS":
+      return {
+        ...state,
+        products: { ...state.products, isLoading: true, isDataFetched: false },
+      };
+
+    case "FETCH_PRODUCTS_SUCCESS":
       return {
         ...state,
         products: {
           ...state.products,
           isLoading: false,
           data: action.payload,
+          isDataFetched: true,
         },
       };
     case "FETCH_PRODUCTS_ERROR":
@@ -28,6 +33,7 @@ export const productsReducer = (state = defaultState, action) => {
           isLoading: false,
           data: [],
           error: action.payload,
+          isDataFetched: true,
         },
       };
     default:
