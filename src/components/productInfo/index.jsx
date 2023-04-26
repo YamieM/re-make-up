@@ -1,10 +1,17 @@
+import { useCallback, useState } from "react";
 import { NavLink } from "react-router-dom";
-// import defImage from "../../images/defProductImage.jpeg";
+import defImage from "../../images/defProductImage.jpeg";
 
 export const ProductInfo = ({ product }) => {
+  const [img, setImg] = useState(product.image_link);
+
+  const errorImg = useCallback(() => {
+    setImg(defImage);
+  }, [setImg]);
+
   return (
     <div className="product-info">
-      <img src={product.image_link} className="product-image" alt="" />
+      <img src={img} onError={errorImg} className="product-image" alt="" />
       <div className="product-info-text">
         <h3 className="info-about-product">Brand: {product.brand}</h3>
         <h3 className="info-about-product">

@@ -32,7 +32,6 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
   text-align: center;
   margin: 10px;
@@ -44,7 +43,7 @@ a {
     height: 300px;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 20px;    
+    gap: 20px;
   }
 }
 .item-card:hover {

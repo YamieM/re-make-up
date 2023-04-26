@@ -5,9 +5,9 @@ export const ProductTypeSelect = (props) => {
       name="filterForm_productType"
       className="filter-form_tags-list"
       title="Product type"
-      // defaultValue={sessionStorage.getItem("productType") || ""}
+      defaultValue='Product type'
     >
-      <option value="" disabled>
+      <option value={undefined} disabled>
         Product type
       </option>
       <option value="Blush">Blush</option>

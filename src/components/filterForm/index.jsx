@@ -1,15 +1,20 @@
 import { ProductTypeSelect } from "../productTypeSelect";
 import { BrandNameInput } from "../brandNameInput";
-import { FilterFormButton } from "../filterFormButton";
-import "./style.scss";
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/productsReducer";
+import "./style.scss";
 
 export const FilterForm = () => {
+  const { isLoading, isRequested } = useSelector(
+    (state) => state.productsReducer.products
+  );
+
   const [filterParams, setFilterParams] = useState({
-    brand: sessionStorage.getItem("brandName") || "",
-    product_type: sessionStorage.getItem("productType") || undefined,
+    brand: isRequested ? sessionStorage.getItem("brandName") : "",
+    product_type: isRequested
+      ? sessionStorage.getItem("productType")
+      : undefined,
   });
 
   const dispatch = useDispatch();
@@ -17,6 +22,8 @@ export const FilterForm = () => {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
+      sessionStorage.setItem("productType", filterParams.product_type);
+      sessionStorage.setItem("brandName", filterParams.brand);
       dispatch(fetchProducts(filterParams));
     },
     [dispatch, filterParams]
@@ -51,14 +58,14 @@ export const FilterForm = () => {
         <label>Filter</label>
         <BrandNameInput onChange={onChangeBrand} value={filterParams.brand} />
         <ProductTypeSelect
-          setFilterParams={onChangeProductType}
+          onChange={onChangeProductType}
           value={filterParams.product_type}
         />
-        {/* <FilterFormButton
-          brandName={filterParams.brandName}
-          productType={filterParams.productType}
-        /> */}
-        <button type="submit">Submit</button>
+        {isLoading ? (
+          <input type="submit" name="submitBtn" value="Search" disabled />
+        ) : (
+          <button type="submit">Search</button>
+        )}
       </form>
     </div>
   );

@@ -1,23 +1,17 @@
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { fetchSingleProduct } from "../../store/singleProductReducer";
-
-// import defImage from "../../images/defProductImage.jpeg";
+import { useCallback, useState } from "react";
+import defImage from "../../images/defProductImage.jpeg";
 
 export const Product = ({ brand, name, image_link, id }) => {
-  const dispatch = useDispatch();
+  const [img, setImg] = useState(image_link);
 
-  const setSingleProduct = () => {
-    dispatch(fetchSingleProduct({ id: id }));
-  };
+  const errorImg = useCallback(() => {
+    setImg(defImage);
+  }, [setImg]);
 
   return (
-    <NavLink
-      onClick={setSingleProduct}
-      className="item-card"
-      to={`/product/${id}`}
-    >
-      <img src={image_link} className="product-images" alt="" />
+    <NavLink className="item-card" to={`/product/${id}`}>
+      <img src={img} onError={errorImg} className="product-images" alt="" />
       <span className="item-card_products">{`${brand} [${name}]`}</span>
     </NavLink>
   );

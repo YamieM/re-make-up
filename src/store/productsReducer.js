@@ -3,7 +3,7 @@ const defaultState = {
     data: [],
     isLoading: false,
     error: null,
-    isDataFetched: false,
+    isRequested: false,
   },
 };
 
@@ -12,7 +12,7 @@ export const productsReducer = (state = defaultState, action) => {
     case "FETCH_PRODUCTS":
       return {
         ...state,
-        products: { ...state.products, isLoading: true, isDataFetched: false },
+        products: { ...state.products, isLoading: true, isRequested: true },
       };
 
     case "FETCH_PRODUCTS_SUCCESS":
@@ -22,7 +22,7 @@ export const productsReducer = (state = defaultState, action) => {
           ...state.products,
           isLoading: false,
           data: action.payload,
-          isDataFetched: true,
+          isRequested: true,
         },
       };
     case "FETCH_PRODUCTS_ERROR":
@@ -33,7 +33,7 @@ export const productsReducer = (state = defaultState, action) => {
           isLoading: false,
           data: [],
           error: action.payload,
-          isDataFetched: true,
+          isRequested: true,
         },
       };
     default:

@@ -1,12 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../product";
 import { Loader } from "../loader";
+import { useEffect } from "react";
+import { fetchProducts } from "../../store/productsReducer";
 import "./style.scss";
 
 export const Products = () => {
-  const { data, isLoading } = useSelector(
+  const dispatch = useDispatch();
+
+  const { data, isLoading, isRequested } = useSelector(
     (state) => state.productsReducer.products
   );
+
+  useEffect(() => {
+    if (!isRequested) dispatch(fetchProducts({}));
+  }, [dispatch, isRequested]);
 
   if (isLoading) return <Loader class="preloader-active" />;
 

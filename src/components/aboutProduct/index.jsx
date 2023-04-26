@@ -17,10 +17,10 @@ export const AboutProduct = () => {
   );
 
   useEffect(() => {
-    if (!isLoading && !dataSingle.length) {
+    if (!dataSingle.length) {
       dispatch(fetchSingleProduct({ id: params.id }));
     }
-  }, [dispatch]);
+  }, [dataSingle.length, dispatch, params.id]);
 
   console.log(dataSingle);
   if (isLoading) return <Loader class="preloader-product-active" />;
