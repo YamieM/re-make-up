@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Gruppo&display=swap");
 
+$line-color: rgba(99, 68, 68, 0.212);
+
 .main-container {
   display: flex;
   align-items: center;
   text-align: center;
   flex-direction: column;
   font-family: "Gruppo", cursive;
+  min-height: 100vh;
 }
 .div-product {
   display: flex;
@@ -13,33 +16,73 @@
   flex-direction: column;
   text-align: justify;
   width: 70vw;
+  max-width: 800px;
   &::before {
     content: "";
-    background-color: rgba(97, 70, 70, 0.288);
+    background-color: $line-color;
     height: 2px;
-    width: 70vw;
+    width: 100%;
+    max-width: 800px;
   }
   &::after {
     content: "";
-    background-color: rgba(97, 70, 70, 0.288);
+    background-color: $line-color;
     height: 2px;
-    width: 70vw;
+    width: 100%;
+    max-width: 800px;
+  }
+  @media (max-width: 700px) {
+    width: 90vw;
   }
 }
 .product-name {
   letter-spacing: 5px;
   font-size: 40px;
   color: rgb(87, 62, 57);
+  text-transform: uppercase;
+  margin-top: 60px;
+  @media (max-width: 700px) {
+    font-size: 32px;
+  }
+}
+.product-info {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  align-self: center;
+  padding-top: 30px;
+  @media (max-width: 700px) {
+    gap: 30px;
+    padding-top: 5px;
+  }
+}
+.product-info-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px;
+  @media (max-width: 700px) {
+    height: auto;
+  }
 }
 .product-image {
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  width: 100%;
+  height: 100%;
   border-radius: 5%;
   object-fit: fill;
-  margin-top: 10px;
+  @media (max-width: 700px) {
+    max-width: 200px;
+    max-height: 240px;
+  }
 }
 .info-about-product {
   margin: 10px 0px 5px 5px;
+  text-transform: uppercase;
 }
 .buy-now-button {
   height: 30px;
@@ -50,10 +93,35 @@
   border: none;
   margin: 10px 0px 0px 5px;
   transition: 0.5s;
+
   &:hover {
     transform: scale(1.1);
     background-color: rgb(197, 114, 128);
     cursor: pointer;
+  }
+}
+.colors-div {
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  padding-top: 30px;
+  &::after {
+    content: "";
+    background-color: $line-color;
+    height: 2px;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+  }
+  &::before {
+    content: "";
+    background-color: $line-color;
+    height: 2px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
   }
 }
 
@@ -61,19 +129,15 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 70vw;
-  margin-top: 20px;
-  &::after {
-    content: "";
-    background-color: rgba(97, 70, 70, 0.288);
-    height: 2px;
-    width: 70vw;
-  }
-  &::before {
-    content: "";
-    background-color: rgba(97, 70, 70, 0.288);
-    height: 2px;
-    width: 70vw;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  padding-top: 30px;
+  margin-left: 30px;
+
+  @media (max-width: 700px) {
+    padding-top: 5px;
+    width: 100%;
   }
 }
 .color-circle {
@@ -81,20 +145,41 @@
   height: 20px;
   border-radius: 50%;
   margin-right: 10px;
+  border: 0.3px solid rgba(150, 149, 149, 0.568);
+  @media (max-width: 500px) {
+    width: 16px;
+    height: 16px;
+  }
 }
 .single-color-section {
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
-  width: auto;
+  width: 30%;
+  height: 50px;
   margin: 5px 10px 5px 0px;
+  @media (max-width: 500px) {
+    margin: 5px 0 5px 0px;
+    width: 50%;
+  }
+}
+.name-of-color {
+  word-wrap: break-word;
+  text-align: left;
+  text-transform: lowercase;
+  margin: 5px;
 }
 .back-button {
   font-size: 20px;
   color: rgb(180, 128, 124);
-  margin-top: 5px;
+  margin-bottom: 20px;
+
   &:hover {
     cursor: pointer;
   }
+}
+
+.product-description > summary {
+  list-style: none;
+  cursor: pointer;
 }

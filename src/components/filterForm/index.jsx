@@ -1,77 +1,71 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { changeUrl } from "../../store/urlReducer";
-import { getUrl } from "../../helpers/getUrl";
+import { ProductTypeSelect } from "../productTypeSelect";
+import { BrandNameInput } from "../brandNameInput";
+import { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../store/productsReducer";
 import "./style.scss";
 
 export const FilterForm = () => {
-  const dispatch = useDispatch();
+  const { isLoading, isRequested } = useSelector(
+    (state) => state.productsReducer.products
+  );
 
   const [filterParams, setFilterParams] = useState({
-    brandName: "",
-    productType: false,
+    brand: isRequested ? sessionStorage.getItem("brandName") : "",
+    product_type: isRequested
+      ? sessionStorage.getItem("productType")
+      : undefined,
   });
 
-  const onChangeBrand = (event) => {
-    setFilterParams((previousState) => {
-      return { ...previousState, brandName: event.target.value };
-    });
-    sessionStorage.setItem("brandName", event.target.value);
-  };
+  const dispatch = useDispatch();
 
-  const onChangeProductType = (event) => {
-    setFilterParams((previousState) => {
-      return { ...previousState, productType: event.target.value };
-    });
-    sessionStorage.setItem("productType", event.target.value);
-  };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      sessionStorage.setItem("productType", filterParams.product_type);
+      sessionStorage.setItem("brandName", filterParams.brand);
+      dispatch(fetchProducts(filterParams));
+    },
+    [dispatch, filterParams]
+  );
 
-  const getFilterParams = (event) => {
-    dispatch(
-      changeUrl(getUrl(filterParams.brandName, filterParams.productType))
-    );
-    event.preventDefault();
-  };
+  const onChangeBrand = useCallback(
+    (e) => {
+      setFilterParams({ ...filterParams, brand: e.target.value });
+    },
+    [filterParams]
+  );
+
+  const onChangeProductType = useCallback(
+    (e) => {
+      console.log(e);
+      setFilterParams({ ...filterParams, product_type: e.target.value });
+    },
+    [filterParams]
+  );
+
+  console.log(filterParams);
 
   return (
     <div className="form-container">
       <h1>Base of makeUp</h1>
-      <form action="" name="filterForm" className="filter-form">
+      <form
+        action=""
+        name="filterForm"
+        className="filter-form"
+        onSubmit={handleSubmit}
+      >
         <label>Filter</label>
-        <input
-          name="filterForm_productBrand"
-          type=""
-          className="filterForm_input-brand"
-          placeholder="Input brand"
-          onChange={onChangeBrand}
-        />
-        <select
-          name="filterForm_productType"
-          className="filter-form_tags-list"
-          title="Product type"
+        <BrandNameInput onChange={onChangeBrand} value={filterParams.brand} />
+        <ProductTypeSelect
           onChange={onChangeProductType}
-          defaultValue={false}
-        >
-          <option value={false} disabled>
-            Product type
-          </option>
-          <option value="Blush">Blush</option>
-          <option value="Bronzer">Bronzer</option>
-          <option value="Eyebrow">Eyebrow</option>
-          <option value="Eyeliner">Eyeliner</option>
-          <option value="Eyeshadow">Eyeshadow</option>
-          <option value="Foundation">Foundation</option>
-          <option value="Lip liner">Lip liner</option>
-          <option value="Lipstick">Lipstick</option>
-          <option value="Mascara">Mascara</option>
-          <option value="Nail polish">Nail polish</option>
-        </select>
-        <input
-          type="submit"
-          name="submitBtn"
-          value="Search"
-          onClick={getFilterParams}
+          value={filterParams.product_type}
         />
+        {isLoading ? (
+          <input type="submit" name="submitBtn" value="Search" disabled />
+        ) : (
+          <button type="submit">Search</button>
+        )}
       </form>
     </div>
   );

@@ -1,56 +1,30 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../product";
-import "./style.css";
 import { Loader } from "../loader";
+import { useEffect } from "react";
+import { fetchProducts } from "../../store/productsReducer";
+import "./style.scss";
 
 export const Products = () => {
-  const [state, setState] = useState({
-    products: [],
-    classLoader: "preloader-active",
-    classError: "error-disabled",
-  });
-  const url = useSelector((state) => state.url.url);
+  const dispatch = useDispatch();
+
+  const { data, isLoading, isRequested } = useSelector(
+    (state) => state.productsReducer.products
+  );
+
   useEffect(() => {
-    axios
-      .get(url)
-      .then((resp) => {
-        const products = resp.data;
-        setState((previousState) => {
-          return { ...previousState, products: products };
-        });
-        setState((previousState) => {
-          return { ...previousState, classLoader: "preloader-disabled" };
-        });
-        if (!!products.length) {
-          setState((previousState) => {
-            return { ...previousState, classError: "error-active" };
-          });
-        }
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err.response.status);
-        } else if (err.request) {
-          console.log(err.request);
-        } else {
-          console.log("Error", err.message);
-        }
-        console.log(err.config);
-      });
-  }, [setState, url]);
+    if (!isRequested) dispatch(fetchProducts({}));
+  }, [dispatch, isRequested]);
+
+  if (isLoading) return <Loader class="preloader-active" />;
 
   return (
     <div className="cards">
-      {state.products.length ? (
-        state.products.map((product) => (
-          <Product key={product.id} {...product} />
-        ))
+      {data.length ? (
+        data.map((product) => <Product key={product.id} {...product} />)
       ) : (
-        <span className={state.classError}>NOT FOUND</span>
+        <span className="error-active">BRAND NOT FOUND</span>
       )}
-      <Loader class={state.classLoader} />
     </div>
   );
 };
