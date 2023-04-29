@@ -5,6 +5,7 @@ import { ProductColors } from "../../components/productColors";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleProduct } from "../../store/singleProductReducer";
 import { Loader } from "../loader/";
+import { TabsProduct } from "./components/TabsProduct";
 import "../../styles/aboutProduct.scss";
 
 export const AboutProduct = () => {
@@ -22,7 +23,6 @@ export const AboutProduct = () => {
     }
   }, [dataSingle.length, dispatch, params.id]);
 
-  console.log(dataSingle);
   if (isLoading) return <Loader class="preloader-product-active" />;
 
   return (
@@ -31,13 +31,7 @@ export const AboutProduct = () => {
       <div className="div-product">
         <ProductInfo product={dataSingle} />
         <ProductColors product={dataSingle} />
-        <p className="other-text">Description: {dataSingle.description}</p>
-        Tags:
-        <ul className="other-text">
-          {dataSingle.tag_list?.map((tag) => {
-            return <li>{tag}</li>;
-          })}
-        </ul>
+        <TabsProduct product={dataSingle} />       
       </div>
       <span onClick={() => navigate(-1)} className="back-button">
         Back

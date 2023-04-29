@@ -1,9 +1,11 @@
-import { ProductTypeSelect } from "../productTypeSelect";
-import { BrandNameInput } from "../brandNameInput";
+import { ProductTypeSelect } from "./components/ProductTypeSelect.jsx";
+import { BrandInput } from "./components/BrandInput.jsx";
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/productsReducer";
+import Button from "@mui/material/Button";
 import "./style.scss";
+import { SearchButton } from "./components/SearchButton.jsx";
 
 export const FilterForm = () => {
   const { isLoading, isRequested } = useSelector(
@@ -12,9 +14,7 @@ export const FilterForm = () => {
 
   const [filterParams, setFilterParams] = useState({
     brand: isRequested ? sessionStorage.getItem("brandName") : "",
-    product_type: isRequested
-      ? sessionStorage.getItem("productType")
-      : undefined,
+    product_type: isRequested ? sessionStorage.getItem("productType") : "",
   });
 
   const dispatch = useDispatch();
@@ -44,7 +44,6 @@ export const FilterForm = () => {
     [filterParams]
   );
 
-  console.log(filterParams);
 
   return (
     <div className="form-container">
@@ -55,16 +54,17 @@ export const FilterForm = () => {
         className="filter-form"
         onSubmit={handleSubmit}
       >
-        <label>Filter</label>
-        <BrandNameInput onChange={onChangeBrand} value={filterParams.brand} />
+        <BrandInput onChange={onChangeBrand} value={filterParams.brand} />
         <ProductTypeSelect
           onChange={onChangeProductType}
           value={filterParams.product_type}
         />
         {isLoading ? (
-          <input type="submit" name="submitBtn" value="Search" disabled />
+          <Button type="submit" size="small" disabled variant="contained">
+            Search
+          </Button>
         ) : (
-          <button type="submit">Search</button>
+          <SearchButton />
         )}
       </form>
     </div>
