@@ -6,7 +6,6 @@ function* fetchWorker({ payload }) {
   try {
     const resp = yield call(apiFetchProducts, payload);
     yield put(fetchProductsSuccess(resp.data));
-    console.log(resp);
   } catch (err) {
     yield put(fetchProductsError(err));
   }

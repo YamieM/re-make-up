@@ -14,5 +14,6 @@ export const Product = ({ brand, name, image_link, id }) => {
       <img src={img} onError={errorImg} className="product-images" alt="" />
       <span className="item-card_products">{`${brand} [${name}]`}</span>
     </NavLink>
-  );
+ 
+ );
 };
