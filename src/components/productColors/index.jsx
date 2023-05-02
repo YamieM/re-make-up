@@ -25,33 +25,29 @@ export const ProductColors = ({ product }) => {
             </AccordionSummary>
             <AccordionDetails>
               <div className="colors-section">
-                {product.product_colors?.map((color) => {
-                  return (
-                    <div className="single-color-section">
-                      <div
-                        className="color-circle"
-                        style={{ backgroundColor: `${color.hex_value}` }}
-                      />
-                      <h4 className="name-of-color">{color.colour_name}</h4>
-                    </div>
-                  );
-                })}
+                {product.product_colors?.map((color) => (
+                  <div className="single-color-section" key={color.colour_name}>
+                    <div
+                      className="color-circle"
+                      style={{ backgroundColor: `${color.hex_value}` }}
+                    />
+                    <h4 className="name-of-color">{color.colour_name}</h4>
+                  </div>
+                ))}
               </div>
             </AccordionDetails>
           </Accordion>
         ) : (
           <div className="colors-section">
-            {product.product_colors?.map((color) => {
-              return (
-                <div className="single-color-section">
-                  <div
-                    className="color-circle"
-                    style={{ backgroundColor: `${color.hex_value}` }}
-                  />
-                  <h4 className="name-of-color">{color.colour_name}</h4>
-                </div>
-              );
-            })}
+            {product.product_colors?.map((color) => (
+              <div className="single-color-section" key={color.colour_name}>
+                <div
+                  className="color-circle"
+                  style={{ backgroundColor: `${color.hex_value}` }}
+                />
+                <h4 className="name-of-color">{color.colour_name}</h4>
+              </div>
+            ))}
           </div>
         )}
       </div>

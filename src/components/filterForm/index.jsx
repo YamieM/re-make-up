@@ -38,12 +38,10 @@ export const FilterForm = () => {
 
   const onChangeProductType = useCallback(
     (e) => {
-      console.log(e);
       setFilterParams({ ...filterParams, product_type: e.target.value });
     },
     [filterParams]
   );
-
 
   return (
     <div className="form-container">
@@ -60,7 +58,12 @@ export const FilterForm = () => {
           value={filterParams.product_type}
         />
         {isLoading ? (
-          <Button type="submit" size="small" disabled variant="contained">
+          <Button
+            sx={{ height: "40px", width: "76px" }}
+            type="submit"
+            disabled
+            variant="contained"
+          >
             Search
           </Button>
         ) : (

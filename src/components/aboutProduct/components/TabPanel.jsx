@@ -17,16 +17,18 @@ export const TabPanel = (props) => {
           product.tag_list?.length ? (
             <div>
               <ul className="other-text">
-                {product.tag_list?.map((tag) => {
-                  return <li>{tag}</li>;
-                })}
+                {product.tag_list?.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
               </ul>
             </div>
           ) : (
             <p>No tags</p>
           )
         ) : (
-          <p className="other-text"> {product.description}</p>
+          <p className="other-text">
+            {product.description ? product.description : "No description"}
+          </p>
         )}
       </Box>
     </div>
